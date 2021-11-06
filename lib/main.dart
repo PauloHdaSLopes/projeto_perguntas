@@ -8,28 +8,46 @@ void main() {
 
 class _PerguntaAppState extends State<PerguntaApp> {
   var _perguntaSelecionada = 0;
-
+  var _pontosTotais = 0;
+  
   final _perguntas = const [
     {
       'texto': 'Qual a sua idade?',
-      'respostas': ['15', '20', '25', '27']
+      'respostas': [
+        {'texto': '15', 'pontos': 10},
+        {'texto': '20', 'pontos': 10},
+        {'texto': '25', 'pontos': 10},
+        {'texto': '27', 'pontos': 10},
+      ]
     },
     {
       'texto': 'Qual o seu signo?',
-      'respostas': ['Peixes', 'Capricornio', 'Sagitario', 'Touro']
+      'respostas': [
+        {'texto': 'Peixes', 'pontos': 1},
+        {'texto': 'Capricornio', 'pontos': 1},
+        {'texto': 'Sagitario', 'pontos': 1},
+        {'texto': 'Touro', 'pontos': 1},
+      ]
     },
     {
       'texto': 'Qual a sua cor favorita?',
-      'respostas': ['Azul', 'Vermelho', 'Verde', 'Amarelo']
+      'respostas': [
+        {'texto': 'Azul', 'pontos': 1},
+        {'texto': 'Vermelho', 'pontos': 1},
+        {'texto': 'Verde', 'pontos': 1},
+        {'texto': 'Amarelo', 'pontos': 1},
+      ]
     },
   ];
 
-  void _responder() {
+  void _responder(int pontos) {
     if (temPerguntaSelecionada) {
       setState(() {
         _perguntaSelecionada++;
+        _pontosTotais += pontos;
       });
     }
+    print(_pontosTotais);
   }
 
   bool get temPerguntaSelecionada {
