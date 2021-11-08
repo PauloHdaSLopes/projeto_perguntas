@@ -14,27 +14,27 @@ class _PerguntaAppState extends State<PerguntaApp> {
     {
       'texto': 'Qual a sua idade?',
       'respostas': [
-        {'texto': '15', 'pontos': 10},
-        {'texto': '20', 'pontos': 10},
-        {'texto': '25', 'pontos': 10},
-        {'texto': '27', 'pontos': 10},
+        {'texto': '15', 'pontos': 1},
+        {'texto': '20', 'pontos': 2},
+        {'texto': '25', 'pontos': 3},
+        {'texto': '27', 'pontos': 5},
       ]
     },
     {
       'texto': 'Qual o seu signo?',
       'respostas': [
-        {'texto': 'Peixes', 'pontos': 1},
+        {'texto': 'Peixes', 'pontos': 3},
         {'texto': 'Capricornio', 'pontos': 1},
-        {'texto': 'Sagitario', 'pontos': 1},
-        {'texto': 'Touro', 'pontos': 1},
+        {'texto': 'Sagitario', 'pontos': 2},
+        {'texto': 'Touro', 'pontos': 5},
       ]
     },
     {
       'texto': 'Qual a sua cor favorita?',
       'respostas': [
-        {'texto': 'Azul', 'pontos': 1},
-        {'texto': 'Vermelho', 'pontos': 1},
-        {'texto': 'Verde', 'pontos': 1},
+        {'texto': 'Azul', 'pontos': 2},
+        {'texto': 'Vermelho', 'pontos': 5},
+        {'texto': 'Verde', 'pontos': 3},
         {'texto': 'Amarelo', 'pontos': 1},
       ]
     },
@@ -47,7 +47,13 @@ class _PerguntaAppState extends State<PerguntaApp> {
         _pontosTotais += pontos;
       });
     }
-    print(_pontosTotais);
+  }
+
+  void _reiniciar() {
+    setState(() {
+      _perguntaSelecionada = 0;
+      _pontosTotais = 0;
+    });
   }
 
   bool get temPerguntaSelecionada {
@@ -56,12 +62,6 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   @override
   Widget build(BuildContext context) {
-    // Forma imperativa
-    // List<Widget> widgets = [];
-    // for(String texto in respostas) {
-    //   widgets.add(Resposta(texto,_responder));
-    // }
-
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -72,7 +72,7 @@ class _PerguntaAppState extends State<PerguntaApp> {
                 perguntas: _perguntas,
                 perguntaSelecionada: _perguntaSelecionada,
                 responder: _responder)
-            : const Resultado(),
+            : Resultado(_pontosTotais, _reiniciar),
       ),
     );
   }
